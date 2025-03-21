@@ -28,7 +28,7 @@ function BookCard({ book }) {
           <p className="font-medium mb-5">
             ${book?.newPrice} <span className="line-through font-normal ml-2">${book?.oldPrice}</span>
           </p>
-          <button className="btn-primary  flex items-center gap-1 ">
+          <button className="btn-primary w-[10em] flex items-center justify-center gap-1 ">
             <FiShoppingCart className="" />
             <span>Add to Cart</span>
           </button>

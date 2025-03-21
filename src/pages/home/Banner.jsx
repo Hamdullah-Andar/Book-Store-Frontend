@@ -18,7 +18,7 @@ function Banner() {
           to captivating memoirs, this week's new releases offer something for
           everyone
         </p>
-        <button className="btn-primary">Subscribe</button>
+        <button className="btn-primary w-[10em]">Subscribe</button>
       </div>
     </div>
   );
