@@ -15,7 +15,7 @@ const navigation = [
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   console.log(isDropdownOpen);
-  const currentUser = true;
+  const currentUser = false;
   return (
     <div className="max-w-screen-2xl mx-auto px-4 py-6">
       <nav className="flex justify-between items-center">
