@@ -4,7 +4,16 @@ import { getImgUrl } from "../../utils/getImgUrl";
 
 import { Link } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/features/cart/cartSlice";
+
 function BookCard({ book }) {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (book) => {
+    dispatch(addToCart(book));
+  };
+
   return (
     <div className="rounded-lg transition-shadow duration-300">
       <div className="flex flex-col sm:flex-row sm:items-center sm:h-72  sm:justify-center gap-4">
@@ -24,11 +33,21 @@ function BookCard({ book }) {
               {book?.title}
             </h3>
           </Link>
-          <p className="text-gray-600 mb-5 line-clamp-4">{book?.description.length > 80 ? `${book.description.slice(0, 80)}...` : book?.description}</p>
-          <p className="font-medium mb-5">
-            ${book?.newPrice} <span className="line-through font-normal ml-2">${book?.oldPrice}</span>
+          <p className="text-gray-600 mb-5 line-clamp-4">
+            {book?.description.length > 80
+              ? `${book.description.slice(0, 80)}...`
+              : book?.description}
           </p>
-          <button className="btn-primary w-[10em] flex items-center justify-center gap-1 ">
+          <p className="font-medium mb-5">
+            ${book?.newPrice}{" "}
+            <span className="line-through font-normal ml-2">
+              ${book?.oldPrice}
+            </span>
+          </p>
+          <button
+            onClick={() => handleAddToCart(book)}
+            className="btn-primary w-[10em] flex items-center justify-center gap-1 "
+          >
             <FiShoppingCart className="" />
             <span>Add to Cart</span>
           </button>
