@@ -2,14 +2,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import getBaseUrl from "../../utils/baseURL";
 import Loading from "../../components/Loading";
-import { Link } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { HiViewGridAdd } from "react-icons/hi";
 import { MdOutlineManageHistory } from "react-icons/md";
 import { MdIncompleteCircle } from "react-icons/md";
 
 const DashboardLayout = () => {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState({});
+  const [data, setData] = useState({})
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,13 +32,15 @@ const DashboardLayout = () => {
     fetchData();
   }, []);
 
+  const handleLogout = () => {};
+
   if (loading) return <Loading />;
 
   return (
     <section className="flex md:bg-gray-100 min-h-screen overflow-hidden">
       <aside className="hidden sm:flex sm:flex-col">
         <a
-          href="#"
+          href="/"
           className="inline-flex items-center justify-center h-20 w-20 bg-purple-600 hover:bg-purple-500 focus:bg-purple-500"
         >
           <img src="/fav-icon.png" alt="" />
@@ -65,7 +68,7 @@ const DashboardLayout = () => {
               </svg>
             </a>
             <Link
-              to="#"
+              to="/dashboard"
               className="inline-flex items-center justify-center py-3 text-purple-600 bg-white rounded-lg"
             >
               <span className="sr-only">Dashboard</span>
@@ -85,14 +88,14 @@ const DashboardLayout = () => {
               </svg>
             </Link>
             <Link
-              to="#"
+              to="/dashboard/add-new-book"
               className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
             >
               <span className="sr-only">Add Book</span>
               <HiViewGridAdd className="h-6 w-6" />
             </Link>
             <Link
-              to="#"
+              to="/dashboard/manage-books"
               className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
             >
               <span className="sr-only">Documents</span>
@@ -212,7 +215,10 @@ const DashboardLayout = () => {
                   />
                 </svg>
               </button>
-              <button className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full">
+              <button
+                onClick={handleLogout}
+                className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full"
+              >
                 <span className="sr-only">Log out</span>
                 <svg
                   aria-hidden="true"
@@ -240,7 +246,7 @@ const DashboardLayout = () => {
             </div>
             <div className="flex flex-col md:flex-row items-start justify-end -mb-3">
               <Link
-                to="#"
+                to="/dashboard/manage-books"
                 className="inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3"
               >
                 <svg
@@ -260,7 +266,7 @@ const DashboardLayout = () => {
                 Manage Books
               </Link>
               <Link
-                to="#"
+                to="/dashboard/add-new-book"
                 className="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3"
               >
                 <svg
@@ -281,7 +287,7 @@ const DashboardLayout = () => {
               </Link>
             </div>
           </div>
-          <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+          {/* <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             <div className="flex items-center p-8 bg-white shadow rounded-lg">
               <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
                 <svg
@@ -370,8 +376,8 @@ const DashboardLayout = () => {
                 <span className="block text-gray-500">Total Orders</span>
               </div>
             </div>
-          </section>
-          <section className="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
+          </section> */}
+          {/* <section className="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
             <div className="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
               <div className="px-6 py-5 font-semibold border-b border-gray-100">
                 The number of orders per month
@@ -553,8 +559,8 @@ const DashboardLayout = () => {
                 </div>
               </div>
             </div>
-          </section>
-          <section className="text-right font-semibold text-gray-500">
+          </section> */}
+          {/* <section className="text-right font-semibold text-gray-500">
             <a href="#" className="text-purple-600 hover:underline">
               Recreated on Codepen
             </a>{" "}
@@ -573,7 +579,8 @@ const DashboardLayout = () => {
               original design
             </a>{" "}
             made by Chili Labs
-          </section>
+          </section> */}
+          <Outlet />
         </main>
       </div>
     </section>
