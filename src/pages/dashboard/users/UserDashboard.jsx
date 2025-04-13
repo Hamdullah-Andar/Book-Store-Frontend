@@ -206,7 +206,6 @@ const UserDashboard = () => {
     const groupedOrders = groupOrdersByDate(orders);
     const dateSections = ['Today', 'Yesterday', 'Last Week', 'Last Month', 'Last Year', 'Older'];
 
-    console.log("Orders:", orders);
     return (
         <div className="bg-gray-100 py-16">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
