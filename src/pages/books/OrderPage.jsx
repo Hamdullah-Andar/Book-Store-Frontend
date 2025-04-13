@@ -35,8 +35,8 @@ const OrderPage = () => {
               </p>
               <h3 className="font-semibold mt-2">Products Id:</h3>
               <ul>
-                {order.productIds.map((productId) => (
-                  <li key={productId}>{productId}</li>
+                {order.productIds.map((book) => (
+                  <li key={book._Id}>{book.title}</li>
                 ))}
               </ul>
             </div>

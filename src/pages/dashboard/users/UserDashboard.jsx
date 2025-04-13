@@ -184,8 +184,8 @@ const OrderItem = ({ order }) => (
         <div className="border-t pt-2 mt-2">
             <p className="text-sm font-medium text-gray-700 mb-1">Products:</p>
             <ul className="list-disc list-inside space-y-1 text-sm text-gray-600">
-                {order.productIds.map((productId) => (
-                    <li key={productId}>{productId}</li>
+                {order.productIds.map((book) => (
+                    <li key={book._id}>{book.title}</li>
                 ))}
             </ul>
         </div>
