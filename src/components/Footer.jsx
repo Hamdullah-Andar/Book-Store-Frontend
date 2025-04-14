@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import footerLogo from "../assets/footer-logo.png";
 
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import { useCreateSubscriberMutation } from "../redux/features/subscriber/subscriberApi";
+import Swal from "sweetalert2";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [subscribe, { isLoading, isSuccess, isError, error }] =
+    useCreateSubscriberMutation();
+
+  const handleSubscribe = async () => {
+    if (!email) return alert("Please enter a valid email.");
+    console.log("Trying to Subscribe with: ", email);
+    try {
+      await subscribe({ email }).unwrap();
+      Swal.fire({
+        title: "Subscription Successful",
+        text: "You will get the update through your Email!",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, it's Okay!",
+      });
+      setEmail(""); // Clear the field
+    } catch (err) {
+      console.error("Subscription failed:", err);
+    }
+  };
   return (
     <footer className="bg-gray-600 text-white py-10 px-4">
       {/* Top Section */}
@@ -45,12 +70,25 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Enter your Email"
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 rounded-l-md text-black bg-white focus:outline-none"
             />
-            <button className="bg-primary px-6 py-2 rounded-r-md hover:bg-primary-dark">
-              Subscribe
+            <button
+              onClick={handleSubscribe}
+              className="bg-primary px-6 py-2 rounded-r-md hover:bg-primary-dark"
+              disabled={isLoading}
+            >
+              {isLoading ? "Subscribing..." : "Subscribe"}
             </button>
           </div>
+          {/* {isSuccess && (
+            <p className="text-green-300 mt-2">Subscribed successfully!</p>
+          )}
+          {isError && (
+            <p className="text-red-300 mt-2">
+              {error?.data?.message || "Subscription failed."}
+            </p>
+          )} */}
         </div>
       </div>
 
