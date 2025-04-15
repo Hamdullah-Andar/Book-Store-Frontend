@@ -23,9 +23,13 @@ const ordersApi = createApi({
       }),
       providesTags: ["Orders"],
     }),
+    getAllOrders: builder.query({
+      query: () => "/allOrders",
+      providesTags: ["Orders"],
+    }),
   }),
 });
 
-export const { useCreateOrderMutation, useGetOrderByEmailQuery } = ordersApi;
+export const { useCreateOrderMutation, useGetOrderByEmailQuery, useGetAllOrdersQuery } = ordersApi;
 
 export default ordersApi;
