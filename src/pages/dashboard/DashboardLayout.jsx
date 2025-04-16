@@ -1,11 +1,15 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { HiViewGridAdd } from "react-icons/hi";
 import { MdOutlineManageHistory } from "react-icons/md";
 import { BsBorderStyle } from "react-icons/bs";
 
 const DashboardLayout = () => {
-  const handleLogout = () => {};
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   return (
     <section className="flex md:bg-gray-100 min-h-screen overflow-hidden">
@@ -77,7 +81,7 @@ const DashboardLayout = () => {
               className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
             >
               <span className="sr-only">Orders</span>
-              <BsBorderStyle className="h-6 w-6"  />
+              <BsBorderStyle className="h-6 w-6" />
             </Link>
           </nav>
           <div className="inline-flex items-center justify-center h-20 w-20 border-t border-gray-700">
@@ -195,6 +199,7 @@ const DashboardLayout = () => {
               </button>
               <button
                 onClick={handleLogout}
+                title="Log out"
                 className="relative p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:bg-gray-100 focus:text-gray-600 rounded-full"
               >
                 <span className="sr-only">Log out</span>
