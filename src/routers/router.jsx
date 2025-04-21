@@ -17,6 +17,7 @@ import AddBook from "../pages/dashboard/addBook/AddBook";
 import UpdateBook from "../pages/dashboard/EditBook/UpdateBook";
 import UserDashboard from "../pages/dashboard/users/UserDashboard";
 import AllOrderPage from "../pages/books/AllOrderPage";
+import ViewOrderInvoice from "../pages/books/ViewOrderInvoice";
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllOrderPage />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "view-order/:id",
+        element: (
+          <AdminRoute>
+            <ViewOrderInvoice />
           </AdminRoute>
         ),
       },
