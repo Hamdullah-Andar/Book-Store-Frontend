@@ -23,10 +23,12 @@ const ordersApi = createApi({
       }),
       providesTags: ["Orders"],
     }),
+
     getAllOrders: builder.query({
-      query: () => "/allOrders",
-      providesTags: ["Orders"],
+      query: ({ page = 1, limit = 10 }) =>
+        `/allOrders?page=${page}&limit=${limit}`,
     }),
+    
     getOrderById: builder.query({
       query: (id) => `/${id}`,
     }),
