@@ -93,25 +93,25 @@ const Dashboard = () => {
           <div className="px-6 py-4 border-b border-gray-100">
             <h3 className="text-lg font-semibold">Recent Orders</h3>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
+          <div className="overflow-x-auto w-full">
+            <table className="w-full text-left table-auto">
               <thead className="bg-gray-50 text-gray-600 text-xs uppercase font-semibold">
                 <tr>
-                  <th className="px-6 py-3">Customer</th>
-                  <th className="px-6 py-3">Price</th>
-                  <th className="px-6 py-3">Status</th>
-                  <th className="px-6 py-3">Date</th>
+                  <th className="px-2 py-2">Customer</th>
+                  <th className="px-2 py-2">Price</th>
+                  <th className="px-2 py-2">Status</th>
+                  <th className="px-2 py-2">Date</th>
                 </tr>
               </thead>
               <tbody className="text-sm divide-y divide-gray-100">
                 {data?.recentOrders?.map((order, index) => (
                   <tr key={index}>
-                    <td className="px-6 py-4 font-medium text-gray-900">{order.name}</td>
-                    <td className="px-6 py-4">${order.totalPrice}</td>
-                    <td className="px-6 py-4">
-                      <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Completed</span>
+                    <td className="px-2 py-2 font-medium text-gray-900 truncate max-w-[100px] sm:max-w-[150px]">{order.name}</td>
+                    <td className="px-2 py-2">${order.totalPrice}</td>
+                    <td className="px-2 py-2">
+                      <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-[10px] md:text-xs">Completed</span>
                     </td>
-                    <td className="px-6 py-4 text-gray-500">
+                    <td className="px-2 py-2 text-gray-500 text-xs whitespace-nowrap">
                       {new Date(order.createdAt).toLocaleDateString()}
                     </td>
                   </tr>

@@ -1,10 +1,12 @@
 import React from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { HiViewGridAdd, HiOutlineCollection, HiOutlineClipboardList, HiOutlineLogout, HiOutlineBell } from "react-icons/hi";
 import { MdOutlineManageHistory, MdOutlineDashboard } from "react-icons/md";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
@@ -12,19 +14,19 @@ const DashboardLayout = () => {
 
   return (
     <section className="flex bg-gray-50 min-h-screen overflow-hidden font-primary">
-      <aside className="hidden sm:flex sm:flex-col w-20 md:w-64 bg-gray-900 transition-all duration-300">
+      <aside className="hidden sm:flex sm:flex-col w-64 flex-shrink-0 bg-gray-900 transition-all duration-300">
         <div className="flex items-center justify-center h-20 bg-purple-700">
            <Link to="/" className="text-white text-2xl font-bold flex items-center space-x-2">
               <img src="/fav-icon.png" alt="" className="w-10 h-10" />
-              <span className="hidden md:inline">BookStore</span>
+              <span className="inline">BookStore</span>
            </Link>
         </div>
         <div className="flex-grow flex flex-col justify-between text-gray-400">
           <nav className="flex flex-col p-4 space-y-2">
-            <SidebarLink to="/dashboard" icon={<MdOutlineDashboard size={24} />} label="Dashboard" active />
-            <SidebarLink to="/dashboard/add-new-book" icon={<HiViewGridAdd size={24} />} label="Add Book" />
-            <SidebarLink to="/dashboard/manage-books" icon={<MdOutlineManageHistory size={24} />} label="Manage Books" />
-            <SidebarLink to="/dashboard/order-books" icon={<HiOutlineClipboardList size={24} />} label="Orders" />
+            <SidebarLink to="/dashboard" icon={<MdOutlineDashboard size={24} />} label="Dashboard" active={currentPath === "/dashboard"} />
+            <SidebarLink to="/dashboard/add-new-book" icon={<HiViewGridAdd size={24} />} label="Add Book" active={currentPath === "/dashboard/add-new-book"} />
+            <SidebarLink to="/dashboard/manage-books" icon={<MdOutlineManageHistory size={24} />} label="Manage Books" active={currentPath === "/dashboard/manage-books"} />
+            <SidebarLink to="/dashboard/order-books" icon={<HiOutlineClipboardList size={24} />} label="Orders" active={currentPath === "/dashboard/order-books"} />
           </nav>
           
           <div className="p-4 border-t border-gray-800">
@@ -33,7 +35,7 @@ const DashboardLayout = () => {
               className="flex items-center w-full p-3 hover:bg-gray-800 hover:text-white rounded-lg transition-colors"
             >
               <HiOutlineLogout size={24} />
-              <span className="ml-3 hidden md:inline font-medium">Logout</span>
+              <span className="ml-3 font-medium">Logout</span>
             </button>
           </div>
         </div>
@@ -98,7 +100,7 @@ const SidebarLink = ({ to, icon, label, active }) => (
     }`}
   >
     {icon}
-    <span className="ml-3 hidden md:inline font-medium">{label}</span>
+    <span className="ml-3 font-medium">{label}</span>
   </Link>
 );
 
